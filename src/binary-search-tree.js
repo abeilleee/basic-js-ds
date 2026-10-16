@@ -1,14 +1,12 @@
-const { NotImplementedError } = require('../extensions/index.js');
-
-const { Node } = require('../extensions/list-tree.js');
+const { Node } = require("../extensions/list-tree.js");
 
 /**
-* Implement simple binary search tree according to task description
-* using Node from extensions
-*/
+ * Implement simple binary search tree according to task description
+ * using Node from extensions
+ */
 class BinarySearchTree {
   constructor() {
-    this.rootNode = null; 
+    this.rootNode = null;
   }
 
   root() {
@@ -26,7 +24,8 @@ class BinarySearchTree {
 
   insertNode(node, newNode) {
     if (newNode.data < node.data) {
-      if (!node.left) {                               //если слева нет узла добавляю новый туда, если есть запускаю ф-ию рекурсивно
+      if (!node.left) {
+        //если слева нет узла добавляю новый туда, если есть запускаю ф-ию рекурсивно
         node.left = newNode;
       } else {
         this.insertNode(node.left, newNode);
@@ -44,7 +43,6 @@ class BinarySearchTree {
     return this.find(data) !== null;
   }
 
-
   find(data) {
     return this.searchNode(this.rootNode, data);
   }
@@ -58,7 +56,7 @@ class BinarySearchTree {
     } else if (data > node.data) {
       return this.searchNode(node.right, data);
     } else {
-      return node; 
+      return node;
     }
   }
 
@@ -75,18 +73,19 @@ class BinarySearchTree {
       return node;
     } else if (data > node.data) {
       node.right = this.removeNode(node.right, data);
-      return node;                                          //найденный узел
+      return node; //найденный узел
     } else {
       if (!node.left && !node.right) {
-        return null;                                      //узел не имеющий children
+        return null; //узел не имеющий children
       }
       if (!node.left) {
-        return node.right;                                //у узла только right child
+        return node.right; //у узла только right child
       }
-      if (!node.right) {                                  //у узла только left child
-        return node.left; 
+      if (!node.right) {
+        //у узла только left child
+        return node.left;
       }
-      node.data = this.minNode(node.right).data;            //если у узла two children нахожу минимальный справа
+      node.data = this.minNode(node.right).data; //если у узла two children нахожу минимальный справа
       node.right = this.removeNode(node.right, node.data);
       return node;
     }
@@ -100,11 +99,15 @@ class BinarySearchTree {
   }
 
   min() {
-    return this.minNode(this.rootNode) ? this.minNode(this.rootNode).data : null;
+    return this.minNode(this.rootNode)
+      ? this.minNode(this.rootNode).data
+      : null;
   }
 
   max() {
-    return this.maxNode(this.rootNode) ? this.maxNode(this.rootNode).data : null;
+    return this.maxNode(this.rootNode)
+      ? this.maxNode(this.rootNode).data
+      : null;
   }
 
   maxNode(node) {
@@ -115,7 +118,6 @@ class BinarySearchTree {
   }
 }
 
-
 module.exports = {
-  BinarySearchTree
+  BinarySearchTree,
 };
